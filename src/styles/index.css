@@ -1,0 +1,159 @@
+/* ── Google Fonts ──────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;900&display=swap');
+
+/* ── Reset & CSS Variables ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #020408;
+  --bg2: #060d14;
+  --panel: #0d1e2e;
+  --border: #0e2840;
+  --cyan: #00e5ff;
+  --red: #ff1744;
+  --orange: #ff6d00;
+  --yellow: #ffd600;
+  --green: #00e676;
+  --purple: #d500f9;
+  --blue: #2979ff;
+  --text: #c8dce8;
+  --text2: #7fa8c0;
+  --text3: #3d6680;
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: #163550; border-radius: 2px; }
+
+/* ── Keyframes ─────────────────────────────────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .35; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes ripple {
+  0%   { transform: scale(.8); opacity: 1; }
+  100% { transform: scale(3);  opacity: 0; }
+}
+
+@keyframes flash {
+  0%   { background: rgba(0, 229, 255, .12); }
+  100% { background: transparent; }
+}
+
+/* ── Utility classes ───────────────────────────────────────────────────────── */
+.mono  { font-family: 'Share Tech Mono', monospace; }
+.orb   { font-family: 'Orbitron', sans-serif; }
+.pulse { animation: pulse 2s infinite; }
+
+/* ── Scanline overlay ──────────────────────────────────────────────────────── */
+.scanline {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, .03) 2px,
+    rgba(0, 0, 0, .03) 4px
+  );
+}
+
+/* ── Grid background ───────────────────────────────────────────────────────── */
+.gridbg {
+  background-image:
+    linear-gradient(rgba(0, 229, 255, .022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, .022) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Layout helpers ────────────────────────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  height: 100vh;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.sidebar {
+  transition: width .3s;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #060d14, #020408);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.topbar {
+  height: 44px;
+  background: linear-gradient(90deg, #060d14, #020408);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.content-area {
+  flex: 1;
+  overflow: auto;
+  padding: 11px;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sidebar { width: 54px !important; }
+  .sidebar-label { display: none !important; }
+  .sidebar-meta { display: none !important; }
+  .topbar-stats { display: none !important; }
+
+  .grid-5col  { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid-4col  { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid-3col  { grid-template-columns: 1fr 1fr !important; }
+  .grid-2col  { grid-template-columns: 1fr !important; }
+  .grid-dash  { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .grid-5col  { grid-template-columns: 1fr !important; }
+  .grid-4col  { grid-template-columns: 1fr !important; }
+  .grid-3col  { grid-template-columns: 1fr !important; }
+
+  .topbar { padding: 0 8px; gap: 8px; }
+  .content-area { padding: 7px; }
+}
