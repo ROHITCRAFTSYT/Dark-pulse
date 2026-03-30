@@ -158,4 +158,4 @@ MIT — free to use, modify, and deploy.
 
 ---
 
-*Built with React + Vite + Claude AI*
+*Built with React + Vite*
